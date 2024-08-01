@@ -1,6 +1,5 @@
 import replace from "@rollup/plugin-replace";
 import react from "@vitejs/plugin-react";
-import path from "path";
 import { defineConfig } from "vite";
 import vitePluginSingleSpa from "vite-plugin-single-spa";
 
@@ -19,23 +18,4 @@ export default defineConfig({
       preventAssignment: true,
     }),
   ],
-  build: {
-    target: "esnext",
-    lib: {
-      entry: path.resolve(__dirname, "src/spa.tsx"),
-      name: "user-ui",
-      formats: ["umd"],
-      fileName: (format) => `user-ui.${format}.js`,
-    },
-    rollupOptions: {
-      external: ["single-spa", "@org-name/root"],
-      output: {
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "single-spa": "singleSpa",
-        },
-      },
-    },
-  },
 });
